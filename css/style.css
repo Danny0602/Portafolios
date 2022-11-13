@@ -640,7 +640,8 @@ footer {
 
 .footer_container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    text-align: center;
+    grid-template-columns: repeat(3, 1fr);
     gap: 5rem;
 }
 
@@ -654,6 +655,7 @@ footer {
 
 footer ul li {
     margin-bottom: 0.7rem;
+    
 }
 
 footer ul li a:hover {
@@ -667,6 +669,8 @@ footer ul li a:hover {
 
 .footer_social {
     display: flex;
+    justify-items: center;
+    justify-content: center;
     gap: 1rem;
     font-size: 1.2rem;
     margin-top: 2rem;
