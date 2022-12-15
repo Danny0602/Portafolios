@@ -768,13 +768,15 @@ footer ul li a:hover {
     /* .services_container .cards .card:hover::after {
         transform: rotate(5deg);
     } */
-    .gallery a {
-        height: 14rem;
-        width: 18rem;
-        margin: 1.2rem;
-        border-radius: 0.3rem;
-        overflow: hidden;
-        box-shadow: 0 3px 5px var(--primary);
+    .gallery .card{
+        
+
+        height: 16rem;
+    width: 20rem;
+    margin: 1rem;
+    border-radius: 0.3rem;
+    overflow: hidden;
+    box-shadow: 0 3px 5px var(--primary);
     }
 
     .courses_container{
