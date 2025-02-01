@@ -2,20 +2,25 @@ version: "3.8"
 
 services:
   portafolio:
-    image: nginx:latest
+    build: .
     container_name: portafolio
-    volumes:
-      - ./portafolio:/usr/share/nginx/html
-
-
+    restart: unless-stopped
+    networks:
+      - my_network
 
   proxy:
     image: nginx:latest
     container_name: nginx_proxy
+    restart: unless-stopped
     ports:
       - "80:80"
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
     depends_on:
       - portafolio
-     
+    networks:
+      - my_network
+
+networks:
+  my_network:
+    driver: bridge
