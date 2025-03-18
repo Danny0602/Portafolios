@@ -4,5 +4,4 @@ services:
     build: .
     container_name: portafolio
     restart: always
-    networks:
-      - my_network
+
