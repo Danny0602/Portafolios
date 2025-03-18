@@ -4,4 +4,6 @@ services:
     build: .
     container_name: portafolio
     restart: always
+    ports:
+       - "80:80"
 
