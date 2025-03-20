@@ -7,8 +7,7 @@ services:
     labels:
       - "traefik.http.routers.portafolio.rule=host('portafolio.alejandromolar.com')"
     networks:
-      traefik_network:
+      - traefik_network
 networks:
   traefik_network: 
-    name: traefik_network
-    driver: bridge
+    external: true
