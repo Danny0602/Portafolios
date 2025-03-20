@@ -10,6 +10,6 @@ services:
       traefik_network:
 networks:
   traefik_network: 
-    name: traefik_network
+    name: traefik_net
     driver: bridge
     external: true
