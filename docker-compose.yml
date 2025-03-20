@@ -5,7 +5,7 @@ services:
     container_name: portafolio
     restart: always
     labels:
-      - "traefik.http.routers.portafolio.rule=host('portafolio.alejandromolar.com')"
+      - "traefik.http.routers.portafolio.rule=host('alejandromolar.com')"
     networks:
       traefik_network:
 networks:
