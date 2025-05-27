@@ -1,385 +1,1537 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daniel Alejandro </title>
-    <link rel="icon" href="image/desarrollo-web.png">
-    <!-- Font Awesome CDN link -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
-    <!-- Typing Script CDN Link -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.0/typed.min.js"></script>
+    <title>Alejandro Molar | Ingeniero en Sistemas & Full Stack Developer</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👨‍💻</text></svg>">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
-    <!-- Custom CSS file link -->
-    <link rel="stylesheet" href="css/style.css">
+        :root {
+            --primary: #29e9bc;
+            --primary-dark: #20d4a8;
+            --secondary: #10b981;
+            --accent: #34d399;
+            --text-primary: #ffffff;
+            --text-secondary: #d1d5db;
+            --text-light: #9ca3af;
+            --background: #0c1013;
+            --surface: #13131a;
+            --surface-dark: #1a1a24;
+            --border: rgba(255, 255, 255, 0.1);
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+            --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            --gradient-subtle: linear-gradient(135deg, rgba(41, 233, 188, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%);
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--background);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(12, 16, 19, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(12, 16, 19, 0.98);
+            box-shadow: var(--shadow);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-primary);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: var(--background);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(41,233,188,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.5;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .hero-text .highlight {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-text .subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        .hero-text .description {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.875rem 2rem;
+            border-radius: 0.75rem;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-avatar {
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: var(--gradient);
+            padding: 8px;
+            box-shadow: var(--shadow-lg);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Section Styling */
+        .section {
+            padding: 6rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 1rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .about-content h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .about-content p {
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--surface);
+            border-radius: 1rem;
+            border: 1px solid var(--border);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-item {
+            background: var(--surface);
+            padding: 2rem 1rem;
+            border-radius: 1rem;
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+            border-color: var(--primary);
+        }
+
+        .skill-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1rem;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--background);
+        }
+
+        .skill-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Experience Section */
+        .experience-timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline-item {
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--primary);
+            box-shadow: var(--shadow);
+        }
+
+        .timeline-date {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .timeline-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin: 0.5rem 0;
+        }
+
+        .timeline-company {
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-description {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--surface);
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .project-image {
+            height: 200px;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tech-tag {
+            background: var(--primary);
+            color: var(--background);
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: color 0.3s ease;
+        }
+
+        .project-link:hover {
+            color: var(--primary-dark);
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--gradient-subtle);
+        }
+
+        .contact-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-item {
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: 1rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1rem;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--background);
+        }
+
+        .contact-item h4 {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-item p {
+            color: var(--text-secondary);
+        }
+
+        .contact-item a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--surface-dark);
+            color: var(--text-secondary);
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer p {
+            color: var(--text-light);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: var(--surface);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                padding-top: 2rem;
+                transition: right 0.3s ease;
+                border-top: 1px solid var(--border);
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .nav-menu li {
+                margin: 1rem 0;
+            }
+
+            .nav-link {
+                font-size: 1.2rem;
+                padding: 1rem;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .mobile-menu.active span:nth-child(1) {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+
+            .mobile-menu.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .mobile-menu.active span:nth-child(3) {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+
+            .hero {
+                padding: 6rem 0 4rem;
+                min-height: auto;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .hero-text h1 {
+                font-size: 2.2rem;
+                margin-bottom: 1rem;
+            }
+
+            .hero-text .subtitle {
+                font-size: 1.2rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .hero-text .description {
+                font-size: 1rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .hero-avatar {
+                width: 250px;
+                height: 250px;
+                margin-bottom: 1rem;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+                gap: 0.8rem;
+            }
+
+            .btn {
+                padding: 0.75rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .section {
+                padding: 4rem 0;
+            }
+
+            .section-title {
+                font-size: 2rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .section-subtitle {
+                font-size: 1rem;
+                margin-bottom: 3rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .about-content {
+                order: 2;
+            }
+
+            .about-image {
+                order: 1;
+                max-width: 250px;
+                margin: 0 auto;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                margin-top: 2rem;
+            }
+
+            .stat-item {
+                padding: 1.2rem;
+            }
+
+            .experience-timeline {
+                max-width: 100%;
+            }
+
+            .timeline-item {
+                padding: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .timeline-title {
+                font-size: 1.1rem;
+            }
+
+            .timeline-description {
+                font-size: 0.9rem;
+                line-height: 1.6;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .skill-item {
+                padding: 1.5rem 0.8rem;
+            }
+
+            .skill-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .skill-name {
+                font-size: 0.9rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .project-card {
+                margin: 0 auto;
+                max-width: 100%;
+            }
+
+            .project-image {
+                height: 150px;
+                font-size: 2.5rem;
+            }
+
+            .project-content {
+                padding: 1.2rem;
+            }
+
+            .project-title {
+                font-size: 1.1rem;
+            }
+
+            .project-description {
+                font-size: 0.9rem;
+                line-height: 1.5;
+            }
+
+            .project-tech {
+                gap: 0.3rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .tech-tag {
+                font-size: 0.7rem;
+                padding: 0.2rem 0.6rem;
+            }
+
+            .project-links {
+                gap: 0.8rem;
+            }
+
+            .project-link {
+                font-size: 0.8rem;
+            }
+
+            .contact-info {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                margin-top: 2rem;
+            }
+
+            .contact-item {
+                padding: 1.5rem;
+            }
+
+            .contact-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .contact-item h4 {
+                font-size: 1rem;
+            }
+
+            .contact-item p {
+                font-size: 0.9rem;
+            }
+
+            .footer {
+                padding: 1.5rem 0;
+            }
+
+            .footer p {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Extra small devices (phones, 480px and down) */
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 0.8rem;
+            }
+
+            .navbar {
+                padding: 0;
+            }
+
+            .nav-container {
+                padding: 0.8rem 0;
+            }
+
+            .logo {
+                font-size: 1.3rem;
+            }
+
+            .hero-text h1 {
+                font-size: 1.8rem;
+                line-height: 1.2;
+            }
+
+            .hero-text .subtitle {
+                font-size: 1rem;
+            }
+
+            .hero-text .description {
+                font-size: 0.9rem;
+            }
+
+            .hero-avatar {
+                width: 200px;
+                height: 200px;
+            }
+
+            .btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.85rem;
+            }
+
+            .section {
+                padding: 3rem 0;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .section-subtitle {
+                font-size: 0.9rem;
+                margin-bottom: 2.5rem;
+            }
+
+            .about-content h3 {
+                font-size: 1.3rem;
+            }
+
+            .about-content p {
+                font-size: 0.9rem;
+                margin-bottom: 1.2rem;
+            }
+
+            .stat-item {
+                padding: 1rem;
+            }
+
+            .stat-number {
+                font-size: 1.6rem;
+            }
+
+            .stat-label {
+                font-size: 0.85rem;
+            }
+
+            .timeline-item {
+                padding: 1.2rem;
+            }
+
+            .timeline-date {
+                font-size: 0.75rem;
+            }
+
+            .timeline-title {
+                font-size: 1rem;
+            }
+
+            .timeline-company {
+                font-size: 0.85rem;
+            }
+
+            .timeline-description {
+                font-size: 0.85rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+            }
+
+            .skill-item {
+                padding: 1.2rem 0.6rem;
+            }
+
+            .skill-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 1.1rem;
+            }
+
+            .skill-name {
+                font-size: 0.8rem;
+            }
+
+            .project-image {
+                height: 120px;
+                font-size: 2rem;
+            }
+
+            .project-content {
+                padding: 1rem;
+            }
+
+            .project-title {
+                font-size: 1rem;
+            }
+
+            .project-description {
+                font-size: 0.85rem;
+            }
+
+            .tech-tag {
+                font-size: 0.65rem;
+                padding: 0.15rem 0.5rem;
+            }
+
+            .project-link {
+                font-size: 0.75rem;
+            }
+
+            .contact-item {
+                padding: 1.2rem;
+            }
+
+            .contact-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 1.1rem;
+            }
+
+            .contact-item h4 {
+                font-size: 0.9rem;
+            }
+
+            .contact-item p {
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Scroll animations */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
 
 <body>
-    <!-- Nav Section Start Here -->
-    <nav>
-        <div class="container nav_container ">
-            <a href="index.html">
-                <h4><span>{ Daniel </span>Alejandro }</h4>
-            </a>
-            <ul class="nav_menu">
-                <li><a href="#home">Inicio</a></li>
-                <li><a href="#about">Sobre MI</a></li>
-                <li><a href="#service">Servicios</a></li>
-                <li><a href="#skills">Herramientas y Tecnologias</a></li>
-                <li><a href="#portfolio">Proyectos</a></li>
-                <!-- <li><a href="#courses">Cursos que h</a></li> -->
-                <li><a href="#contact">Contacto</a></li>
-            </ul>
-            <button id="open-menu-btn"><i class="fa-solid fa-bars"></i></button>
-            <button id="close-menu-btn"><i class="fa-solid fa-xmark"></i></button>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-container">
+                <div class="logo">{ Alejandro Molar }</div>
+                <ul class="nav-menu">
+                    <li><a href="#home" class="nav-link active">Inicio</a></li>
+                    <li><a href="#about" class="nav-link">Sobre mí</a></li>
+                    <li><a href="#experience" class="nav-link">Experiencia</a></li>
+                    <li><a href="#skills" class="nav-link">Tecnologías</a></li>
+                    <li><a href="#projects" class="nav-link">Proyectos</a></li>
+                    <li><a href="#contact" class="nav-link">Contacto</a></li>
+                </ul>
+                <div class="mobile-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
         </div>
     </nav>
-    <!-- Nav Section End Here -->
 
-    <!-- Header Section Start Here -->
-    <header>
-        <div class="container header_container" id="home">
-            <div class="header_left">
-                <div class="header_left_img">
-                    <img src="image/image(2).png" alt="Model Image">
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>
+                        Hola, soy <span class="highlight">Alejandro Molar</span>
+                    </h1>
+                    <p class="subtitle">Ingeniero en Sistemas & Full Stack Developer</p>
+                    <p class="description">
+                        Especializado en Laravel, Vue.js y TypeScript. Con más de 2 años de experiencia creando 
+                        soluciones web robustas y escalables que resuelven problemas complejos del mundo real.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#contact" class="btn btn-primary">
+                            <i class="fas fa-envelope"></i>
+                            Contáctame
+                        </a>
+                        <a href="https://www.canva.com/design/DAFRZUoPqZk/CdcTOxTw3OZp3lCajNu13Q/view" target="_blank" class="btn btn-secondary">
+                            <i class="fas fa-download"></i>
+                            Ver CV
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="header_right">
-                <div class="text-1">Hola, mi nombre es</div>
-                <div class="text-2">Daniel Alejandro </div>
-                <div class="text-3">y soy <span class="typing"></span></div>
-                <a href="https://www.canva.com/design/DAFRZUoPqZk/CdcTOxTw3OZp3lCajNu13Q/view?utm_content=DAFRZUoPqZk&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink"
-                    target="_blank" class="btn">Ver CV
-                </a>
-            </div>
-        </div>
-    </header>
-    <!-- Header Section End Here -->
-
-    <!-- About Me Section Start Here -->
-    <section class="about" id="about">
-        <h2 class="border_bottom">Sobre Mi</h2>
-        <div class="container about_container">
-            <div class="about-img">
-                <img class="img" src="image/danny.png" alt="about model">
-            </div>
-            <div class="about-text">
-                <div class="text">
-                    Mi nombre es Daniel Alejandro y soy <span class="typing-2"></span>
+                <div class="hero-image">
+                    <div class="hero-avatar">
+                        <img src="image/danny.png" alt="Alejandro Molar" onerror="this.style.display='none'">
+                    </div>
                 </div>
-                <p>Actualmente he concluido mi carrera como Técnico Superior en el Área de Desarrollo de Software de
-                    Tecnologías de la Información y me encuentro cursando la Ingenieria en Gestion y Desarrollo de
-                    Software</p>
-                <p>Soy Full stack en el framework de Laravel, he tomado algunos cursos y lo he utilizado desde la
-                    versión 7, hasta la actual que es la 9, Tengo 1 año de experiencia como desarrollador de laravel,
-                    me gusta ir creando proyectos nuevos y tener nuevos retos para resolver </p>
-
-                <a href="cv/cv-Daniel-Alejandro.pdf" target="_blank" class="btn">Descargar CV</a>
             </div>
         </div>
     </section>
-    <!-- About Me Section End Here -->
 
-    <!-- My Services Section Start Here -->
-    <div class="services" id="service">
-        <h2 class="border_bottom">Mis Servicios</h2>
-        <div class="container services_container">
-            <div class="cards">
-                <div class="card">
-                    <div class="sbox">
-                        <i class="fa-solid fa-code"></i>
-                        <h3>Diseñador Web - Fron End</h3>
-                        <p>Maquetación, estilado con experiencia en tecnicas de HTML5, CSS3,SASS,Bootstrap,
-                            TAILWIND CSS,SWEET ALERT, LIVEWIRE,ETC
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="container">
+            <h2 class="section-title scroll-reveal">Sobre mí</h2>
+            <p class="section-subtitle scroll-reveal">
+                Ingeniero apasionado por crear soluciones tecnológicas innovadoras
+            </p>
+            
+            <div class="about-grid">
+                <div class="about-image scroll-reveal">
+                    <img src="image/danny.png" alt="Alejandro Molar" onerror="this.style.display='none'">
+                </div>
+                <div class="about-content scroll-reveal">
+                    <h3>Ingeniero en Sistemas Computacionales</h3>
+                    <p>
+                        Soy un ingeniero titulado con una sólida formación en desarrollo de software y gestión de proyectos. 
+                        Mi especialización se centra en el desarrollo full-stack con Laravel y Vue.js, complementado con 
+                        tecnologías modernas como TypeScript y Docker.
+                    </p>
+                    <p>
+                        Mi experiencia profesional abarca el desarrollo de sistemas empresariales complejos, desde 
+                        la arquitectura de backend hasta la implementación de interfaces de usuario intuitivas. 
+                        He trabajado en proyectos que van desde sistemas de gestión hasta plataformas de comercio electrónico.
+                    </p>
+                    <p>
+                        Tengo una pasión constante por aprender sobre inteligencia artificial, nuevas tecnologías y mejores 
+                        prácticas en el desarrollo de software. Siempre busco crear soluciones eficientes que resuelvan 
+                        problemas complejos y mejoren la experiencia del usuario.
+                    </p>
+                </div>
+            </div>
+
+            <div class="stats-grid scroll-reveal">
+                <div class="stat-item">
+                    <span class="stat-number">2+</span>
+                    <span class="stat-label">Años de Experiencia</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">15+</span>
+                    <span class="stat-label">Proyectos Completados</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">10+</span>
+                    <span class="stat-label">Tecnologías Dominadas</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="section" id="experience" style="background: var(--surface);">
+        <div class="container">
+            <h2 class="section-title scroll-reveal">Experiencia Profesional</h2>
+            <p class="section-subtitle scroll-reveal">
+                Mi trayectoria en el desarrollo de software
+            </p>
+
+            <div class="experience-timeline">
+                <div class="timeline-item scroll-reveal">
+                    <div class="timeline-date">Mayo 2023 - Presente</div>
+                    <h3 class="timeline-title">Full Stack Developer</h3>
+                    <div class="timeline-company">Enlaceforte • Monterrey, Nuevo León</div>
+                    <p class="timeline-description">
+                        Desarrollo de aplicaciones web empresariales utilizando Laravel como backend y Vue.js para el frontend. 
+                        He trabajado en proyectos de sistemas de gestión empresarial, plataformas de e-commerce y paneles 
+                        administrativos. Implemento APIs RESTful, manejo de autenticación con Laravel Breeze/Sanctum, y 
+                        despliegue de aplicaciones usando Docker en VPS con Traefik como proxy reverso.
+                    </p>
+                </div>
+
+                <div class="timeline-item scroll-reveal">
+                    <div class="timeline-date">Mayo 2023 - Presente</div>
+                    <h3 class="timeline-title">Backend Developer & DevOps</h3>
+                    <div class="timeline-company">Proyectos de Infraestructura</div>
+                    <p class="timeline-description">
+                        Especializado en arquitectura de backend con Laravel, implementando middleware personalizados, 
+                        policies de autorización y optimización de consultas con Eloquent ORM. Manejo despliegues 
+                        automatizados con Docker, configuración de VPS, y gestión de SSL certificates con Traefik. 
+                        Integración con APIs externas como Stripe, PayPal y servicios de verificación de email.
+                    </p>
+                </div>
+
+                <div class="timeline-item scroll-reveal">
+                    <div class="timeline-date">2019 - 2024</div>
+                    <h3 class="timeline-title">Formación Académica</h3>
+                    <div class="timeline-company">Universidad Tecnológica Escobedo</div>
+                    <p class="timeline-description">
+                        Completé mi formación como Técnico Superior en Desarrollo de Software (2019) y posteriormente 
+                        me titulé como Ingeniero en Gestión y Desarrollo de Software (2024). Durante mis estudios 
+                        desarrollé proyectos académicos en PHP, Laravel, MySQL y me especialicé en metodologías ágiles 
+                        y gestión de proyectos de software.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section" id="skills">
+        <div class="container">
+            <h2 class="section-title scroll-reveal">Tecnologías & Herramientas</h2>
+            <p class="section-subtitle scroll-reveal">
+                Stack tecnológico con el que trabajo actualmente
+            </p>
+
+            <div class="skills-grid">
+                <div class="skill-item scroll-reveal">
+                    <div class="skill-icon">
+                        <i class="fab fa-laravel"></i>
+                    </div>
+                    <div class="skill-name">Laravel</div>
+                </div>
+                <div class="skill-item scroll-reveal">
+                    <div class="skill-icon">
+                        <i class="fab fa-vuejs"></i>
+                    </div>
+                    <div class="skill-name">Vue.js</div>
+                </div>
+                <div class="skill-item scroll-reveal">
+                    <div class="skill-icon">
+                        <i class="fab fa-js-square"></i>
+                    </div>
+                    <div class="skill-name">TypeScript</div>
+                </div>
+                <div class="skill-item scroll-reveal">
+                    <div class="skill-icon">
+                        <i class="fab fa-docker"></i>
+                    </div>
+                    <div class="skill-name">Docker</div>
+                </div>
+                <div class="skill-item scroll-reveal">
+                    <div class="skill-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <div class="skill-name">MySQL</div>
+                </div>
+                <div class="skill-item scroll-reveal">
+                    <div class="skill-icon">
+                        <i class="fab fa-git-alt"></i>
+                    </div>
+                    <div class="skill-name">Git</div>
+                </div>
+                <div class="skill-item scroll-reveal">
+                    <div class="skill-icon">
+                        <i class="fab fa-linux"></i>
+                    </div>
+                    <div class="skill-name">Linux</div>
+                </div>
+                <div class="skill-item scroll-reveal">
+                    <div class="skill-icon">
+                        <i class="fab fa-html5"></i>
+                    </div>
+                    <div class="skill-name">HTML5</div>
+                </div>
+                <div class="skill-item scroll-reveal">
+                    <div class="skill-icon">
+                        <i class="fab fa-css3-alt"></i>
+                    </div>
+                    <div class="skill-name">CSS3</div>
+                </div>
+                <div class="skill-item scroll-reveal">
+                    <div class="skill-icon">
+                        <i class="fab fa-bootstrap"></i>
+                    </div>
+                    <div class="skill-name">Bootstrap</div>
+                </div>
+                <div class="skill-item scroll-reveal">
+                    <div class="skill-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <div class="skill-name">Tailwind</div>
+                </div>
+                <div class="skill-item scroll-reveal">
+                    <div class="skill-icon">
+                        <i class="fas fa-cube"></i>
+                    </div>
+                    <div class="skill-name">Headless UI</div>
+                </div>
+                <div class="skill-item scroll-reveal">
+                    <div class="skill-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <div class="skill-name">Traefik</div>
+                </div>
+                <div class="skill-item scroll-reveal">
+                    <div class="skill-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <div class="skill-name">VPS</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section" id="projects" style="background: var(--surface);">
+        <div class="container">
+            <h2 class="section-title scroll-reveal">Proyectos Destacados</h2>
+            <p class="section-subtitle scroll-reveal"> 
+                Algunos de los proyectos más importantes que he desarrollado
+            </p>
+
+            <div class="projects-grid">
+                <div class="project-card scroll-reveal">
+                    <div class="project-image">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Sistema de Subscripciones con Stripe</h3>
+                        <p class="project-description">
+                            Plataforma de pagos recurrentes integrada con Stripe para gestión de suscripciones, 
+                            planes y facturación automática.
                         </p>
-
+                        <div class="project-tech">
+                            <span class="tech-tag">Laravel</span>
+                            <span class="tech-tag">Stripe API</span>
+                            <span class="tech-tag">Vue.js</span>
+                            <span class="tech-tag">MySQL</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Danny0602/sistema-de-pagos" target="_blank" class="project-link">
+                                <i class="fab fa-github"></i>
+                                Código
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                                Demo
+                            </a>
+                        </div>
                     </div>
                 </div>
-                <div class="card">
-                    <div class="sbox">
-                        <i class="fa-solid fa-file-code"></i>
-                        <h3>Integracion con terceros</h3>
-                        <p>Implementacion con Apis propias, externas (API REST), servicio de verificacion de corros
-                            electronicos,librerias,etc</p>
 
+                <div class="project-card scroll-reveal">
+                    <div class="project-image">
+                        <i class="fas fa-boxes"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Sistema de Inventario</h3>
+                        <p class="project-description">
+                            Aplicación web para control de inventarios con gestión de productos, proveedores, 
+                            entradas y salidas de mercancía.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Laravel</span>
+                            <span class="tech-tag">Livewire</span>
+                            <span class="tech-tag">MySQL</span>
+                            <span class="tech-tag">Bootstrap</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Danny0602/Sistema-Inventario" target="_blank" class="project-link">
+                                <i class="fab fa-github"></i>
+                                Código
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                                Demo
+                            </a>
+                        </div>
                     </div>
                 </div>
-                <div class="card">
-                    <div class="sbox">
-                        <i class="fa-solid fa-laptop-code"></i>
-                        <h3>Desarrollador Web - Back End</h3>
-                        <p>Experiencia en el Framework de LARAVEL,LIVEWIRE,PHP,MYSQL, implementacion de MIDDLEWARE,
-                            POLICIES,BREEZE, ELOQUENT,ETC</p>
 
+                <div class="project-card scroll-reveal">
+                    <div class="project-image">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Plataforma E-commerce</h3>
+                        <p class="project-description">
+                            Tienda online completa con carrito de compras, pasarela de pagos, gestión de pedidos 
+                            y panel administrativo.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Laravel</span>
+                            <span class="tech-tag">Vue.js</span>
+                            <span class="tech-tag">PayPal API</span>
+                            <span class="tech-tag">MySQL</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Danny0602/Restaurant-Online" target="_blank" class="project-link">
+                                <i class="fab fa-github"></i>
+                                Código
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                                Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card scroll-reveal">
+                    <div class="project-image">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Portal de Empleos</h3>
+                        <p class="project-description">
+                            Plataforma de búsqueda de empleo con perfiles de candidatos, publicación de vacantes 
+                            y sistema de matching inteligente.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Laravel</span>
+                            <span class="tech-tag">Livewire</span>
+                            <span class="tech-tag">Alpine.js</span>
+                            <span class="tech-tag">Tailwind</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Danny0602/DevJobs" target="_blank" class="project-link">
+                                <i class="fab fa-github"></i>
+                                Código
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                                Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card scroll-reveal">
+                    <div class="project-image">
+                        <i class="fas fa-share-alt"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Red Social para Desarrolladores</h3>
+                        <p class="project-description">
+                            Plataforma social enfocada en desarrolladores con compartición de proyectos, 
+                            networking y colaboración en código.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Laravel</span>
+                            <span class="tech-tag">Vue.js</span>
+                            <span class="tech-tag">MySQL</span>
+                            <span class="tech-tag">Socket.io</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Danny0602/IntagramClone" target="_blank" class="project-link">
+                                <i class="fab fa-github"></i>
+                                Código
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                                Demo
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- My Services Section End Here -->
+    </section>
 
-    <!-- My Skills Section Start Here -->
-    <div class="skills" id="skills">
-        <div class="new">
-            <h2 class="border_bottom">Herramientas y Tecnologias </h2>
-        </div>
-
-        <div class="container skills_container">
-            <div class="cards">
-                <div class="card">
-                   <img src="./icons/laravel.png"  alt="">
-                    <p>Laravel</p>
-                </div>
-                <div class="card">
-                   <img src="./icons/mysql.png"  alt="">
-                    <p>MySQL</p>
-                </div>
-                <div class="card">
-                   <img src="./icons/docker.png"  alt="">
-                    <p>Docker</p>
-                </div>
-                <div class="card">
-                   <img src="./icons/linux.png"  alt="">
-                    <p>Linux</p>
-                </div>
-                <div class="card">
-                   <img src="./icons/windows.png"  alt="">
-                    <p>Windows</p>
-                </div>
-                <div class="card">
-                   <img src="./icons/sass.png"  alt="">
-                    <p>SASS</p>
-                </div>
-                <div class="card">
-                   <img src="./icons/tailwind-css.png"  alt="">
-                    <p>Tailwind css</p>
-                </div>
-                <div class="card">
-                   <img src="./icons/bootstrap.png"  alt="">
-                    <p>Bootstrap</p>
-                </div>
-                <div class="card">
-                   <img src="./icons/git.png"  alt="">
-                    <p> git</p>
-                </div>
-                <div class="card">
-                   <img src="./icons/livewire.png"  alt="">
-                    <p>Livewire</p>
-                </div>
-                <div class="card">
-                   <img src="./icons/javascript.png"  alt="">
-                    <p>Js</p>
-                </div>
-                <div class="card">
-                   <img src="./icons/html.png"  alt="">
-                    <p>HTML</p>
-                </div>
-            </div>
-
-        </div>
-    </div>
-    <!-- My Skills Section End Here -->
-
-    <!-- My Portfolio Section Start Here -->
-    <div class="container portfolio_container" id="portfolio">
-
-        <h2 class="border_bottom">Mis proyectos</h2>
-        <div class="gallery">
-
-            <!-- CARD  -->
-            <div class="card">
-                <h4 class="titulo bg">Sitema de empleados</h4>
-                <a target="_blank">
-                    <img src="image/empleados.png" alt="Portfolio 1">
-
-                </a>
-                <div class="bg iconos">
-                    <a target="_blank" href="https://github.com/Danny0602/alianza">
-                        <i class="icono fa-brands fa-github"></i>
-                    </a>
-                    <a target="_blank"
-                        href="https://www.canva.com/design/DAFSR-3NwGE/JuFUnFHYNnkQJ0Elvet3kg/view?utm_content=DAFSR-3NwGE&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink">
-                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                    </a>
-
-                </div>
-
-            </div>
-            <!-- CARD  -->
-            <div class="card">
-                <h4 class="titulo bg">Subscripciones con stripe</h4>
-                <a target="_blank">
-                    <img src="image/stripe2.png" alt="Portfolio 1">
-
-                </a>
-                <div class="bg iconos">
-                    <a target="_blank" href="https://github.com/Danny0602/sistema-de-pagos">
-                        <i class="icono fa-brands fa-github"></i>
-                    </a>
-                    <a target="_blank"
-                        href="https://www.canva.com/design/DAFXIoNgPqQ/acipUZFO3F42bNwb3eu-xw/view?utm_content=DAFXIoNgPqQ&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink">
-                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                    </a>
-
-                </div>
-
-            </div>
-
-            <!-- CARD  -->
-            <div class="card">
-                <h4 class="titulo bg">Sitema de inventario</h4>
-                <a target="_blank"
-                    href="https://www.canva.com/design/DAFRAk28YUQ/At8l6HcSqLTFBN9RI8kZVQ/view?utm_content=DAFRAk28YUQ&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink"><img
-                        src="image/sistemaInventario.png" alt="Portfolio 1">
-                </a>
-                <div class="bg iconos">
-                    <a target="_blank" href="https://github.com/Danny0602/Sistema-Inventario">
-                        <i class="icono fa-brands fa-github"></i>
-                    </a>
-                    <a target="_blank"
-                        href="https://www.canva.com/design/DAFRAk28YUQ/At8l6HcSqLTFBN9RI8kZVQ/view?utm_content=DAFRAk28YUQ&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink">
-                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                    </a>
-
-                </div>
-            </div>
-
-            <!-- CARD  -->
-            <div class="card">
-                <h4 class="titulo bg">Tienda Online</h4>
-                <a target="_blank"
-                    href="https://www.canva.com/design/DAFSR-3NwGE/JuFUnFHYNnkQJ0Elvet3kg/view?utm_content=DAFSR-3NwGE&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink"><img
-                        src="image/tiendaOnline1.png" alt="Portfolio 1">
-                </a>
-                <div class="bg iconos">
-                    <a target="_blank" href="https://github.com/Danny0602/Restaurant-Online">
-                        <i class="icono fa-brands fa-github"></i>
-                    </a>
-                    <a target="_blank"
-                        href="https://www.canva.com/design/DAFSR-3NwGE/JuFUnFHYNnkQJ0Elvet3kg/view?utm_content=DAFSR-3NwGE&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink">
-                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                    </a>
-
-                </div>
-            </div>
-
-            <!-- CARD  -->
-            <div class="card">
-                <h4 class="titulo bg">Plataforma de Empleos</h4>
-
-                <a target="_blank"
-                    href="https://www.canva.com/design/DAFSR9yty9w/FSaB6TUDxPFBr9xgd2jI2w/view?utm_content=DAFSR9yty9w&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink">
-                    <img src="image/devjobs.png" alt="Portfolio 1">
-                </a>
-                <div class="bg iconos">
-                    <a target="_blank" href="https://github.com/Danny0602/DevJobs">
-                        <i class="icono fa-brands fa-github"></i>
-                    </a>
-                    <a target="_blank"
-                        href="https://www.canva.com/design/DAFSR9yty9w/FSaB6TUDxPFBr9xgd2jI2w/view?utm_content=DAFSR9yty9w&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink">
-                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                    </a>
-
-                </div>
-            </div>
-
-            <!-- CARD  -->
-            <div class="card">
-                <h4 class="titulo bg">Red Social Developers</h4>
-
-                <a target="_blank"
-                    href="https://www.canva.com/design/DAFSR7F6H8Q/FlC_dNtgUxjKVZLCT5-wfw/view?utm_content=DAFSR7F6H8Q&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink">
-                    <img src="image/instaclone.png" alt="Portfolio 1">
-                </a>
-                <div class="bg iconos">
-                    <a target="_blank" href="https://github.com/Danny0602/IntagramClone">
-                        <i class="icono fa-brands fa-github"></i>
-                    </a>
-                    <a target="_blank"
-                        href="https://www.canva.com/design/DAFSR7F6H8Q/FlC_dNtgUxjKVZLCT5-wfw/view?utm_content=DAFSR7F6H8Q&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink">
-                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                    </a>
-
-                </div>
-            </div>
-
-            <!-- CARD  -->
-            <div class="card">
-                <h4 class="titulo bg">Panel Administrativo Red Xpert</h4>
-                <a target="_blank"
-                    href="https://www.canva.com/design/DAFDu6kn0Ns/BkNZK0uftjc6UHllZMDZyQ/view?utm_content=DAFDu6kn0Ns&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink">
-                    <img src="image/redxpert.png" alt="Portfolio 1">
-                </a>
-
-                <div class="bg iconos">
-                    <a target="_blank" href="">
-                        <i class="icono fa-brands fa-github"></i>
-                    </a>
-                    <a target="_blank"
-                        href="https://www.canva.com/design/DAFDu6kn0Ns/BkNZK0uftjc6UHllZMDZyQ/view?utm_content=DAFDu6kn0Ns&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink">
-                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                    </a>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- My Portfolio Section End Here -->
-
-
-
-    <!-- Footer Section Start Here -->
-    <footer>
-        <div class="container footer_container">
-            <div class="footer_1">
-                <a href="index.html" class="footer_logo">
-                    <h4>Gracias</h4>
-                </a>
-                <p>Gracias por llegar hasta aquí, si crees que puedo aportar valor a tu equipo no dudes en escribirme.
+    <!-- Contact Section -->
+    <section class="section contact" id="contact">
+        <div class="container">
+            <div class="contact-content">
+                <h2 class="section-title scroll-reveal">¿Trabajamos juntos?</h2>
+                <p class="section-subtitle scroll-reveal">
+                    Estoy disponible para nuevos proyectos y oportunidades de colaboración. 
+                    Si tienes una idea o necesitas desarrollar una solución, contáctame.
                 </p>
-            </div>
 
-            <div class="footer_2">
-                <h4>Navegacion</h4>
-                <ul class="permalinks">
-                    <li><a href="index.html">Inicio</a></li>
-                    <li><a href="#about">Sobre Mi</a></li>
-                    <li><a href="#courses">Mis Proyectos</a></li>
-                    <li><a href="#">Contactame</a></li>
-                </ul>
-            </div>
-
-
-
-            <div class="footer_4">
-                <h4 id="contact">Contactame </h4>
-                <div>
-                    <p>+52 1 8126623666</p>
-                    <p class="mail">dann_molar02@hotmail.com</p>
+                <div class="contact-info">
+                    <div class="contact-item scroll-reveal">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h4>Email</h4>
+                        <p><a href="mailto:dann_molar02@hotmail.com">dann_molar02@hotmail.com</a></p>
+                    </div>
+                    
+                    <div class="contact-item scroll-reveal">
+                        <div class="contact-icon">
+                            <i class="fab fa-linkedin"></i>
+                        </div>
+                        <h4>LinkedIn</h4>
+                        <p><a href="https://www.linkedin.com/in/alejandro-molar-879b15254/" target="_blank">Ver perfil</a></p>
+                    </div>
+                    
+                    <div class="contact-item scroll-reveal">
+                        <div class="contact-icon">
+                            <i class="fab fa-github"></i>
+                        </div>
+                        <h4>GitHub</h4>
+                        <p><a href="https://github.com/Danny0602" target="_blank">Ver repositorios</a></p>
+                    </div>
                 </div>
-                <ul class="footer_social">
-                    <li><a target="_blank" href="https://wa.me/5218126623666"> <i class="fa-brands fa-whatsapp"></i> </a></li>
-                    <li><a target="_blank" href="https://github.com/Danny0602"> <i class="fa-brands fa-github"></i>
-                        </a></li>
-                    <li><a target="_blank" href="https://www.linkedin.com/in/daniel-molar-879b15254/    "> <i
-                                class="fa-brands fa-linkedin"></i> </a>
-                    </li>
-                    <li><a target="_blank" href="mailto:dann_molar02@hotmail.com"> <i class="fa fa-envelope "></i> </a></li>
-                </ul>
+
+                <div style="margin-top: 3rem;">
+                    <a href="mailto:dann_molar02@hotmail.com" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i>
+                        Enviar mensaje
+                    </a>
+                </div>
             </div>
         </div>
-        <div class="footer_copyright">
-            <small>Copyright &copy; Developer Daniel Alejandro Molar Adame</small>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Alejandro Molar. Todos los derechos reservados.</p>
         </div>
     </footer>
-    <!-- Footer Section End Here -->
 
+    <!-- Scripts -->
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
 
-    <!-- Custom Javascript File Link -->
-    <script src="js/script.js"></script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Active navigation highlighting
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Scroll reveal animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Mobile menu toggle (if you want to add mobile menu functionality)
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navMenu = document.querySelector('.nav-menu');
+
+        mobileMenu.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+    </script>
 </body>
 
 </html>
